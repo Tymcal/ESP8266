@@ -58,14 +58,22 @@ void loop() {
   Serial.printf("%f ohm", R);
   Serial.println("");
 
-  if ((int)t > 31 && (int)R > 20000) {
+  //LED switching part
+  if ((int)t > 30 && (int)R > 20000) {
     digitalWrite(led1, 1);
     digitalWrite(led2, 1);
-  } else if ((int)t <= 31 && (int)R > 20000) {
+  } else if ((int)R < 3000) {
+    digitalWrite(led1, 0);
+    digitalWrite(led2, 0);
+  } else if ((int)t <= 30 && (int)R > 20000) {
     digitalWrite(led1, 1);
     digitalWrite(led2, 0);
+  } else if ((int)t > 30 && (int)R <= 20000) {
+    digitalWrite(led1, 0);
+    digitalWrite(led2, 1);
   } else {
     digitalWrite(led1, 0);
     digitalWrite(led2, 0);
   }
+  
 }
